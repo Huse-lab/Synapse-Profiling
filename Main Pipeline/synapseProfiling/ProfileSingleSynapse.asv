@@ -1,0 +1,23 @@
+%Basic Script to load a single pair of MPRender and ROI data files and
+%calculate all relevant stats. See manuscript for general description of
+%methodology and the "calculateSynapseResults.m" function for specific
+%outputs. 
+
+%% Load MPStats and ROI, then run 
+[MPfile, MPfilepath] = uigetfile('.mat',"Choose the MPStats/MPRender File");
+[ROIfile, ROIfilepath] = uigetfile('.mat',"Choose the MPStats/MPRender File");
+
+MPhandle = load(fullfile(MPfilepath,MPfile));
+
+ROIhandle = load(fullfile(ROIfilepath,ROIfile));
+
+MPStats = MPhandle.MPStats;
+
+%to avoid any inconsistencies in variable naming
+roidata_Field = fieldnames(ROIhandle);
+roidata = ROIhandle.(roidata_Field{1});
+
+synapseResults = calculateSynapseStats(MPStats,roidata);
+generateSynapseResultsPage(MPStats,roidata,synapseResults);
+outpng = MPStats.FileName
+saveas(gcf,)
