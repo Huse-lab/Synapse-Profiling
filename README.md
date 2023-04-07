@@ -24,7 +24,7 @@ In Preparation 2023 [Title, Author list, Citation subject to change after submis
 Requirements: MATLAB 2021 or later.
 To use, set MATLAB path to contain all subfolders within this repository Synapse-Profiling-HuseLab. All dependencies and functions should be contained within. Report any missing links or bugs to alex.h.settle@gmail.com or husem@mskcc.org
 
-If you starting with a .tif stack, begin with the Preprocessing step. If you already have MPRender + ROI files, skip to Synapse Analysis Pipeline.
+If you are starting with a .tif stack, begin with the Preprocessing step. If you already have MPRender + ROI files, skip to Synapse Analysis Pipeline.
 
 
 # PREPROCESSING
