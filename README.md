@@ -13,7 +13,7 @@ In Preparation 2023 [Title, Author list, Citation subject to change after submis
 † corresponding author
 
 
-Contents Overview
+## Contents Overview
 1. Preprocessing Pipeline: Convert raw image files into MPStats, annotate ROIs, and convert to MPRender for faster processing
 2. Synapse Analysis Pipeline: extract useful information from MPRender and ROI and store as a synapseResults MATLAB object for batching and comparing across particles
 3. Example .tifs, MPRenders, and ROI files that can be run through the pipeline. 
@@ -21,11 +21,15 @@ Contents Overview
 5. Dependencies: non-original functions and useful code from other sources 
 
 
+## User Guide
 Requirements: MATLAB 2021 or later.
-Set MATLAB path to contain all subfolders within this repository Synapse-Profiling-HuseLab. All dependencies and functions should be contained within. Report any missing links or bugs to alex.h.settle@gmail.com or husem@mskcc.org
+To use, set MATLAB path to contain all subfolders within this repository Synapse-Profiling-HuseLab. All dependencies and functions should be contained within. Report any missing links or bugs to alex.h.settle@gmail.com or husem@mskcc.org
+
+If you starting with a .tif stack, begin with the Preprocessing step. If you already have MPRender + ROI files, skip to Synapse Analysis Pipeline.
 
 
-PREPROCESSING
+# PREPROCESSING
+
 FROM IMAGE TO MPRENDER & ROI FILES
 The pre-processing step is mostly adapted from Vorselen, D. et al. Microparticle traction force microscopy reveals subcellular force exertion patterns in immune cell target interactions. Nat. Commun. 11, 20 (2020). (https://www.nature.com/articles/s41467-019-13804-z)
 See original paper for a general overview of the methodology. 
@@ -74,7 +78,7 @@ Step 4: Manually Select ROI by drawing on 2D projections.
 
 
 
-SYNAPSE ANALYSIS PIPELINE
+# SYNAPSE ANALYSIS PIPELINE
 In this section, we take the MPStats particle data and the ROI information and calculate all relevant statistics calculated in the manuscript (deJesus, Settle et al. 2023) and store them in a large MATLAB struct called synapseResults. This struct can either be a single 1x1 struct or a struct array, depending on the size of the MPStats and ROI inputs. See below for detailed description of the synapseResult fields.
 
 To generate results for a single synapse:
@@ -93,7 +97,7 @@ To generate results for a large batch of data
 	- This will also ask whether you want to make a overview/results summary page for each synapse. This adds time/memory to the total process, and is unnecessary for downstream processing. You can also generate these later using generateSynapseResultsPage.m 
 
 
-Synapse Results Data Structure
+#Synapse Results Data Structure
 - FileName: string, the name of the original .tif file analyzed
 - MeanCurvatureGrid: 50x50 double, a gridded matrix of the synapse ROI, with values at each position defined by the mean curvature at that location
 - GaussianCurvatureGrid: 50x50 double, a gridded matrix of the synapse ROI, with values at each position defined by the gaussian curvature at that location
@@ -110,6 +114,14 @@ Synapse Results Data Structure
 - ProtrusionStats: MATLAB struct containinig data on all negative-curvature features, see featurePicker for details.
 - PeakStats: MATLAB struct containinig data on all positive-curvature features, see featurePicker for details.
 - FeatureSummary: MATLAB struct containing summarized/averaged information on protrusions and peaks for a given synapse.
+
+## Contribution guidelines
+Please contact the authors if you have questions or want to contribute.
+
+## Authors
+Alex Settle (settlea@mskcc.org)
+Miguel de Jesus (dejesusm@mskcc.org)
+
 
 
 
