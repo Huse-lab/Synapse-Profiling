@@ -5,7 +5,7 @@ DAAM Particle Image Processing and Synapse Profiling Guide
 This repository contains functions, scripts, and test-cases to demonstrate and reproduce the topographical analysis of immune synapses interacting with DAAM particles, as described in the associated manuscript: 
 
 "Topographical analysis of immune cell interactions reveals a biomechanical signature for immune cytolysis"
-Miguel de Jesus*, Alexander Settle*, Daan Vorselen, Michael Galiano, Yung Yu Wong, Tian-Ming Fu, Endi Santosa, Fella Tamzalit, Mitchell S. Wang, Zhirong Bao, Joseph C. Sun, Pavak Shah, Julie Theriot, and Morgan Huse†.
+Miguel de Jesus*, Alexander H. Settle*, Daan Vorselen, Thomas K. Gaetjens, Michael Galiano, Yung Yu Wong, Tian-Ming Fu, Endi Santosa, Fella Tamzalit, Mitchell S. Wang, Zhirong Bao, Joseph C. Sun, Pavak Shah, Julie Theriot, Steven M. Abel and Morgan Huse†.
 In Preparation 2023 [Title, Author list, Citation subject to change after submission] 
 
 * equal contribution
