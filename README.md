@@ -35,28 +35,28 @@ Step 1: Load .tiff stacks into a working folder
 
 Step 2: Convert tif data into MPStats. 
 		- Open ImageAnalysis_tiftoMPStats.m, run each section individually:
-	•	%% Read the data files
-	•	%% Extract the images and required metadata
-	•	Click on blob channel
-	•	Z-correction factor "1"
-	•	If needed, enter pixel size information: for Vt-iSIM, 0.108 x 0.108 x 0.300 nm^3
-	•	%% Threshold the images and identify particles
-	•	Particles that encounter problems at this step are excluded from analysis. 
-	•	%% Superlocalize particle edges and triangulate surface
-	•	Pick smoothing of "0" or "1"; for most analyses in the paper 0 was used (Fig. 1 demonstrations use 1 for clarity)
+	•		%% Read the data files
+		•	%% Extract the images and required metadata
+		•	Click on blob channel
+		•	Z-correction factor "1"
+		•	If needed, enter pixel size information: for Vt-iSIM, 0.108 x 0.108 x 0.300 nm^3
+		•	%% Threshold the images and identify particles
+		•	Particles that encounter problems at this step are excluded from analysis. 
+		•	%% Superlocalize particle edges and triangulate surface
+		•	Pick smoothing of "0" or "1"; for most analyses in the paper 0 was used (Fig. 1 demonstrations use 1 for clarity)
 	◦	%% Determine particle coverage by a secondary signal
-	•	No changes from default parameters
-	•	%% Convert secondary signal tomask and align cups
-	•	Stain analysis options: "max"
+		•	No changes from default parameters
+		•	%% Convert secondary signal tomask and align cups
+		•	Stain analysis options: "max"
 	•	%% Realign cup
-	•	Realign the particle such that actin mask is on the center-left third of the theta-phi map
-	•	If masking is done properly, simply clicking "Realign" achieves this; otherwise, click "Clear Mask(!)" re-draw the mask manually, and realign.
-	•	Clicking "Done" updates MPStats structure
+		•	Realign the particle such that actin mask is on the center-left third of the theta-phi map
+		•	If masking is done properly, simply clicking "Realign" achieves this; otherwise, click "Clear Mask(!)" re-draw the mask manually, and realign.
+		•	Clicking "Done" updates MPStats structure
 	•	%% Save MPStats file
-	•	Assign a name to the output file. This will contain all the selected data.
-	•	For manual inspection of particle renderings: run generatePlotsBatch.m
-	•	Saves figures as .figs and .png 
-	•	
+		•	Assign a name to the output file. This will contain all the selected data.
+		•	For manual inspection of particle renderings: run generatePlotsBatch.m
+		•	Saves figures as .figs and .png 
+		
 Step 3: Reduce data size to save memory and processing time
 	•	Open convert_MPStatstoMPRender.m
 	•	run Select Folder of Interest, which should contain any number of MPStats files
