@@ -1,5 +1,4 @@
 # Synapse-Profiling
-Analysis Pipeline accompany manuscript: de Jesus &amp; Settle et al 2023
 
 DAAM Particle Image Processing and Synapse Profiling Guide
 
@@ -31,7 +30,7 @@ If you starting with a .tif stack, begin with the Preprocessing step. If you alr
 # PREPROCESSING
 
 FROM IMAGE TO MPRENDER & ROI FILES
-The pre-processing step is mostly adapted from Vorselen, D. et al. Microparticle traction force microscopy reveals subcellular force exertion patterns in immune cell target interactions. Nat. Commun. 11, 20 (2020). (https://www.nature.com/articles/s41467-019-13804-z)
+The pre-processing step is adapted from Vorselen, D. et al. Microparticle traction force microscopy reveals subcellular force exertion patterns in immune cell target interactions. Nat. Commun. 11, 20 (2020). (https://www.nature.com/articles/s41467-019-13804-z)
 See original paper for a general overview of the methodology. 
 
 Step 1: Load .tiff stacks into a working folder
