@@ -1,0 +1,235 @@
+%-- 1/23/2024 2:22 PM --%
+dummy = rand(20); figure, imagesc(dummy), colorcet('L3')
+colorcet('L3')
+map = colorcet('R1');
+colormap(map)
+ResultsTable.ColorID(1) = 1;
+for idx=1:length(ResultsTable)
+scatter(ResultsTable.SurfaceArea,ResultsTable.DegranArea,ResultsTable.YoungsModulus)
+scatter(ResultsTable.SurfaceArea,ResultsTable.DegranArea,15,ResultsTable.YoungsModulus,'.')
+pbaspect([1 1 1])
+colorcet('R1')
+scatter(ResultsTable.SurfaceArea,ResultsTable.DegranArea,30,ResultsTable.YoungsModulus,'.')
+pbaspect([1 1 1])
+colorcet('R1')
+scatter(ResultsTable.SurfaceArea,ResultsTable.DegranArea,15,ResultsTable.YoungsModulus,'o','filled')
+pbaspect([1 1 1])
+colorcet('R1')
+inclusion = ResultsTable.NumProtrusions == 8000;
+figure,scatter(ResultsTable.SurfaceArea(inclusion),ResultsTable.DegranArea(inclusion),15,ResultsTable.YoungsModulus(inclusion),'o','filled')
+pbaspect([1 1 1])
+colorcet('R1')
+xlim([0 240]),ylim([0 70])
+xlim([80 240]),ylim([0 70])
+inclusion = ResultsTable.NumProtrusions == 8000 & ResultsTable.ClusterSize == 12;
+figure,scatter(ResultsTable.SurfaceArea(inclusion),ResultsTable.DegranArea(inclusion),15,ResultsTable.YoungsModulus(inclusion),'o','filled')
+pbaspect([1 1 1])
+colorcet('R1')
+xlim([80 240]),ylim([0 70])
+unique(ResultsTable.NumProtrusions)
+for idx = 1:length(actin_coverage)
+inclusion = ResultsTable.NumProtrusions == actin_coverage(idx);
+figure,scatter(ResultsTable.SurfaceArea(inclusion),ResultsTable.DegranArea(inclusion),15,ResultsTable.YoungsModulus(inclusion),'o','filled')
+pbaspect([1 1 1])
+colorcet('R1')
+xlim([80 240]),ylim([0 70])
+end
+ResultsTable = removevars(ResultsTable, 'ColorID');
+M = varfun(@mean,ResultsTable,'InputVariables',@isnumeric)
+N = [M;M]
+clearvars -except ResultsTable
+MeanTable = table();
+count = 0;
+for idx=1:10:3840
+count=count+1;
+slice_of_table = ResultsTable(idx:idx+9,:);
+MeanTable(count,:) = varfun(@mean,slice_of_table,'InputVariables',@isnumeric);
+end
+inclusion
+max(inclusion)
+find(inclusion==1)
+cluster
+size(find(inclusion==1))
+cluster'
+E_array = ResultsTable.YoungsModulus;
+figure, histogram(E_array)
+caxis
+for idx=1:21
+figure(idx)
+colorcet('R2')
+colorbar
+end
+mc_i==0;
+mc_i(mc_i~=0);
+for idx = 1:length(actin_coverage)
+inclusion = MeanTable.mean_NumProtrusions == actin_coverage(idx);
+figure,scatter(MeanTable.mean_SurfaceArea(inclusion),MeanTable.mean_DegranArea(inclusion),15,MeanTable.mean_YoungsModulus(inclusion),'o','filled')
+pbaspect([1 1 1])
+colorcet('R2')
+xlim([80 240]),ylim([0 70])
+end
+colormap
+c_map = colormap;
+linspace(1,256,4)
+c_map(linspace(1,256,4),:)
+actin_coverage = unique(ResultsTable.NumProtrusions);
+youngs_moduli = unique(ResultsTable.YoungsModulus);
+for idx=1:20
+figure(idx)
+colorbar
+end
+MeanTable.mean_SurfaceArea/78.5
+MeanTable.mean_DegranArea/78.5
+xlim([1 3]),ylim([0 0.25])
+figure,scatter(ResultsTable.SurfaceArea/78.5,ResultsTable.DegranArea/78.5,15,ResultsTable.YoungsModulus,'o','filled')
+pbaspect([1 1 1])
+colorcet('R2')
+xlim([1 3]),ylim([0 0.25])
+colorcet('R2')
+xlim([1 5]),ylim([0 1])
+xlim([1 3]),ylim([0 1])
+ylim
+ylim([0 1])
+%-- 1/24/2024 2:18 PM --%
+array_actin = [2 4 6 8 10 12 14 16]*1000;
+array_coverage = [6.4 12.7 19.1 25.5 31.8 38.2 44.6 51];
+figure
+subplot(2,1,1)
+plot(array_actin)
+subplot(2,1,2)
+plot(array_coverage)
+diff(array_actin)/array_actin(1)
+diff(array_coverage)/array_coverage(1)
+%-- 1/24/2024 2:22 PM --%
+close all
+inclusion = MeanTable.mean_ClusterSize == clusters(idx) & MeanTable.mean_YoungsModulus == youngs_moduli(jdx);
+MeanTable_cluster40=MeanTable(inclusion,:);
+xlim([0 1])
+figure, figure,scatter(ResultsTable.SurfaceArea(inclusion),ResultsTable.DegranArea(inclusion),15,ResultsTable.YoungsModulus(inclusion),'o','filled')
+figure, figure,scatter(ResultsTable.variance,ResultsTable.DegranArea,15,ResultsTable.YoungsModulus,'o','filled')
+for idx=1:20
+figure(idx), ylim([0 0.8])
+end
+figure, figure,scatter(ResultsTable.variance,ResultsTable.DegranArea,15,ResultsTable.YoungsModulus,'o','filled')
+colormap = colorcet('R2');
+c_map = colormap(linspace(1,256,4),:);
+clear colormap
+colormap(c_map)
+clear all, close all
+ResultsTable = ResultsTableRenamedVars;
+size(ResultsTable)
+unique(ResultsTable.ActinCoverage)
+unique(ResultsTable.ClusterSizem)
+unique(ResultsTable.SurfaceTension)
+unique(ResultsTable.BendingRigidity)
+unique(ResultsTable.MembraneSurfaceAream2)
+unique(ResultsTable1.NumProtrusions)
+unique(ResultsTable1.ClusterSize)
+unique(ResultsTable1.SurfaceArea)
+unique(ResultsTable1.SurfaceTension)
+clear all
+actin_coverage = unique(ResultsTable.NumProtrusions);
+clear all
+colorcet('R2')
+linspace(1,256,8)
+round(ans)
+linspace(1,10,2)
+linspace(1,10,3)
+round(linspace(1,10,3))
+clear all, close all
+ResultsTable = ResultsTable1umGranuleAveragedReplicates;
+MeanTable = ResultsTable1umGranuleAveragedReplicates;
+xlim
+xlim([1 1.6])
+xlim([1 2])
+xlim([1 1.8])
+xlim([1.2 1.8])
+xlim([1.2 1.6])
+ylim([0 0.7])
+xlim([1.2 1.6])
+ylim([0 0.7])
+xlim([1.2 1.6])
+ResultsTable = ResultsTable400nmGranule;
+actin_coverage = unique(MeanTable.mean_NumProtrusions);
+idx
+actin_coverage(1)
+idx=1
+inclusion = MeanTable.mean_NumProtrusions == actin_coverage(idx) ...
+& MeanTable.mean_SurfaceTension == 1 ...
+& MeanTable.mean_BendingRigidity == 1;
+clear inclusion
+clear all
+ResultsTable = ResultsTable400nmGranule
+inclusion = MeanTable.mean_NumProtrusions == actin_coverage(idx) & ...
+MeanTable.mean_SurfaceTension == 1 & ...
+MeanTable.mean_BendingRigidity == 1;
+actin_coverage = unique(MeanTable.mean_NumProtrusions);
+color_map = colorcet('R1');
+figure, hold on
+c_map = color_map(round(linspace(1,256,length(actin_coverage))),:);
+for idx = 1:length(actin_coverage)
+inclusion = MeanTable.mean_NumProtrusions == actin_coverage(idx) & ...
+MeanTable.mean_SurfaceTension == 1 & ...
+MeanTable.mean_BendingRigidity == 1;
+plot(MeanTable.mean_SurfaceArea(inclusion),MeanTable.mean_DegranArea(inclusion)/78.5,'Color',c_map(idx,:),'LineWidth',4)
+pbaspect([1 1 1])
+xlim([1.2 1.6]), ylim([0 0.7])
+end
+for adx = 1:14
+figure(adx)
+ylim([0 0.8])
+end
+
+%%%% Introduced 20240312 based on last segment on
+MeanTable = ResultsTable1umGranuleAveragedReplicates;
+actin_coverage = unique(MeanTable.NumProtrusions);
+color_map = colorcet('R1');
+figure, hold on
+c_map = color_map(round(linspace(1,256,length(actin_coverage))),:);
+for idx = 1:length(actin_coverage)
+inclusion = MeanTable.NumProtrusions == actin_coverage(idx) & ...
+MeanTable.SurfaceTension == 1 & ...
+MeanTable.BendingRigidity == 1;
+plot(MeanTable.varianceMean(inclusion),MeanTable.DegranAreaMean(inclusion)/78.5,'Color',c_map(idx,:),'LineWidth',4)
+pbaspect([1 1 1])
+ylim([0 0.7])
+end
+ylim([0 0.8])
+xlim([0 0.3])
+actin_cluster = unique(MeanTable.ClusterSize);
+color_map = colorcet('R1');
+figure, hold on
+c_map = color_map(round(linspace(1,256,length(actin_cluster))),:);
+for idx = 1:length(actin_cluster)
+inclusion = MeanTable.ClusterSize == actin_cluster(idx) & ...
+MeanTable.SurfaceTension == 1 & ...
+MeanTable.BendingRigidity == 1;
+plot(MeanTable.varianceMean(inclusion),MeanTable.DegranAreaMean(inclusion)/78.5,'Color',c_map(idx,:),'LineWidth',4)
+pbaspect([1 1 1])
+ylim([0 0.8]),xlim([0 0.3])
+end
+
+
+%% For the replotting of Young's modulus
+
+actin_coverage = unique(MeanTable.mean_NumProtrusions);
+
+color_map = colorcet('R1');
+figure, hold on
+c_map = color_map(round(linspace(1,256,length(actin_coverage))),:);
+
+for idx = 1:length(actin_coverage)
+inclusion = MeanTable.mean_NumProtrusions == actin_coverage(idx) & ...
+MeanTable.mean_SurfaceTension == 1 & ...
+MeanTable.mean_BendingRigidity == 1 & ...
+MeanTable.mean_YoungsModulus == 1200;
+plot(MeanTable.mean_SurfaceArea(inclusion)/78.5,MeanTable.mean_DegranArea(inclusion)/78.5,'Color',c_map(idx,:),'LineWidth',4)
+pbaspect([1 1 1])
+xlim([1.2 1.6]), ylim([0 0.7])
+end
+
+for adx = 1:14
+figure(adx)
+ylim([0 0.8])
+end
+

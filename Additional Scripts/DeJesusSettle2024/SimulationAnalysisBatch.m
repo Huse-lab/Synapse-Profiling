@@ -6,23 +6,34 @@ file_list = dir(fullfile(file_path,'*.csv'));
 %% Loop through all csvs, calculate curvature profiles and stats
 
 T = table();
+k=1;
 
 for i = 1:length(file_list)
     i
     file = file_list(i);
-    file.name
-    metadata = struct2table(parse_simulation_name(file.name),'AsArray',true);
-    z = csvread(file.name);
-    curvatureData = struct2table(calculateSimulatedCurvatureStats(z),'AsArray',true);
-    table_row = [metadata curvatureData];
-    T = [T;table_row];
+    if startsWith(file.name,'z_')
+        tic
+        file.name
+        k
+        param_parse = strsplit(strrep(file.name,'z_','param_'),'_rep_');
+        param_file = [param_parse{1} '.csv'];
+        act_file = strrep(file.name,'z_','prot_');
+        metadata = struct2table(read_parameter_file(param_file),'AsArray',true);
+        z = csvread(file.name);
+        act_data = csvread(act_file);
+        curvatureData = struct2table(calculateSimulatedCurvatureStats(z,act_data),'AsArray',true);
+        table_row = [metadata curvatureData];
+        T = [T;table_row];
+        k=k+1;
+        toc
+    end
 end
 
 %% clean up table to make saving simpler for plotting.
 
 cleanT = removevars(T,{'concave_area_map','DegranMap','mc_all','convex_area_map'});
-cleanT = sortrows(cleanT,{'NumProtrusions','ClusterSize'});
-writetable(cleanT,'ResultsTable.csv')
+cleanT = sortrows(cleanT,{'NumProtrusions','MeanClusterDiameter'});
+writetable(cleanT,'05_05_23_ResultsTable.csv')
 
 
 %% Average replicates
