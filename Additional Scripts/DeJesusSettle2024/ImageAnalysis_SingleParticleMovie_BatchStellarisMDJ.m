@@ -15,14 +15,7 @@
 % MPStats (the structure containing the data) and text files with the edge 
 % coordinates and triangulation, can still be saved using the last two cells
 
-% This will generate an MPStats object (struct) that will contain all
-% necessary data for downstream processing. 
-
-% All functions/dependencies for this code segment are containied within a
-% local copy of the DAAMparticle_Shape_Analysis repo. This is the
-% up-to-date version as of 3/1/2023. To use this script, make sure the
-% MATLAB path is set to contain the local copy, and not a future version,
-% to avoid backwards-compatibility issues. 
+% Useful_plots.m can be used to make a couple of example plots
 
 % If you use any part of this code , please cite the manuscript above in any publications
 
@@ -58,33 +51,10 @@ clear('IM3Dcell','LLSMMask','zcorrfactor','data1');
 % Increasing the "UseIncreasedThreshold" value (between 0 and 1) excludes less particles that are
 % close to/touching the border. Warning: this could result in errors later on. Using the watershed
 % option increases computational time by a lot, but allows analyzing movies with adjacent particles.
+Opts = {'UseIncreasedThreshold',0,'watershed',1};
 
-% Ask the user for the size of the desired padding around each particle when cropping particles
-boxpadding = str2double(inputdlg({'in X,Y', 'in Z (bottom)', 'in Z (top)'},...
-    'How many microns should the image around the particles be extended?',[1 90],{'4','5','10'}));
-
-if isempty(boxpadding)
-    
-    warning('Operation cancelled by user')
-
-else
-
-    Opts = {'noparticlesOK',1,'multipleparticles','ok','watershed',1,'checkneighbours',0,'UseIncreasedThreshold',0};
-    MPStats = Threshold_images_and_identify_particles(MPStats,Opts);
-
-    % Isolate particles and create a particle-based structure
-    %MPStats = IMStats_to_MPStats(IMStats);
-    MPStats = CropParticles(MPStats,MPStats,boxpadding);
-    
-end
-
-clear('boxpadding','Opts');
-
-
-%Opts = {'UseIncreasedThreshold',0.5,'watershed',1};
-
-%MPStats = Threshold_images_and_identify_particles(MPStats,Opts);
-%clear('Opts');
+MPStats = Threshold_images_and_identify_particles(MPStats,Opts);
+clear('Opts');
 
 %% Superlocalize particle edges and triangulate surface
 
@@ -137,21 +107,36 @@ MPStats = Determine_base_position_and_align(MPStats,'BaseLat',-pi/2,'BaseColongi
 
 clear('use_integrated_intensity','stain_indicates_contact')
 
-%% Realign the contact mask if necessary
+%% Optional: determine particle coverage by additional signals
+
+% Check if at least one stain has been analyzed so far
+if ~isfield(MPStats,'IMstain')
+    error(['If this is the first fluorescent signal you analyze, use "Determine'...
+        ' particle coverage by a secondary signal" two cells up'])
+end
+
+if exist('data','var')
+    [MPStats,IMStats] = Analyze_Secondary_Signal(data,MPStats,IMStats,'stain',1);
+else
+    [MPStats,IMStats] = Analyze_Secondary_Signal([],MPStats,IMStats,'stain',1);
+end
+
+%% Copy_Change_Mask_MDJ: Took apart Daan's old version of the code (pre-2021-07-08) to be compatible with new version.
+
+warning('off','all');
+
 for idx=1:length(MPStats)
     if idx==1
         MPStats_dummy = Update_Mask_GUI_MDJ(MPStats(idx));
+        MPStats_dummy.FileName
     elseif idx>1
         MPStats_dummy(idx) = Update_Mask_GUI_MDJ(MPStats(idx));
+        MPStats_dummy(idx).FileName
     end
 end
+
 clear MPStats;
 MPStats = MPStats_dummy;
-clear MPStats_dummy
+% clear MPStats_dummy
 
-
-%% %% Assign MPStats name and save
-MPname = input('What to name MPStats file: ','s');
-save(['MPStats_pool ' MPname '.mat'],'MPStats','-v7.3');
-disp(strcat('Sorted and saved MPStats file for'," ",MPname,'.'))
-
+disp('Done updating all masks for this MPStats file.');

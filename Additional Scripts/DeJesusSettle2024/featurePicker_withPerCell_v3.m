@@ -3,10 +3,11 @@
 % peak stats for all synapses in a given folder of MC synapses
 % Fused with features_perCell_v3 on 20230124
 
+% 20230207: Decided w/ MH & AHS to NOT exclude rim relief (c>0) data.
+
 %% Import grids into a cell array 
 % This code segment will search a folder containing grids and import
 % them into 50x50 data structures and into an array. 
-
 
 fprintf('Please select folder of interest containing MC grids \n')
 mc_file_path = uigetdir('Select Folder of interest');
@@ -23,42 +24,18 @@ labels = {};
 colors = [];
 
 for file = files'
-    if contains(file.name,'50x50') % check for only 50x50 grid files
+    if contains(file.name,'_MeanC') % check for only 50x50 grid files
         load(file.name)  %loaded synapse will have variable name 'mc_i'
 
         mc_synapses = [mc_synapses; mc_i];
         names = [names;file.name]; %store file names for plotting/organization
         
-        %This section sets the color corresponding to each T cell type,
-        %feel free to customize by adding/changing elseif statements
-        %Note that the colors must be RGB triplets as shown
-        if contains(file.name,'nonsynapse')
-            colors = [colors ; [1 0 0]]; %red
-            labels = [labels; 'Non-synapse'];
-        elseif contains(file.name,'OTI-Tn')
-            colors = [colors ; [0 0 1]]; %blue
-            labels = [labels; 'OTI-Tn'];
-        elseif contains(file.name,'OTI')
-            colors = [colors ; [0 1 0]]; %green
-            labels = [labels; 'OTI-Eff'];
-        elseif contains(file.name,'5CC7_Tn')
-            colors = [colors ; [0 1 1]]; %cyan
-            labels = [labels; '5CC7-Tn'];
-        elseif contains(file.name,'5CC7')
-            labels = [labels; '5CC7-Eff'];
-            colors = [colors ; [1 0 1]]; %magenta
-        elseif contains(file.name,'P14')
-            colors = [colors ; [1 1 0]]; %yellow
-            labels = [labels; 'P14'];
-        else
-            colors = [colors ; [0 0 0]]; %black
-            labels = [labels; 'Other'];
-        end
     end
         
 end
 
 %% Run through all grids and add stats to nested struct
+
 feature_struct = struct('FileName',{},'Celltype',{},'Protrusion_Stats',{},...
     'Peak_Stats',{},'labeled_Protrusions',{},'labeled_Peaks',{});
 
@@ -105,28 +82,28 @@ for idx=1:length(feature_struct)
     data_Peak = feature_struct(idx).Peak_Stats;
     data_Prot = feature_struct(idx).Protrusion_Stats;
     
-    % Filter out peripheral rim data because those are different from
-    % peaks: > 80 % of centroid-to-edge ([50 50]), which is ~56.5685 pixel
-    % units
-        centroids_peak = [data_Peak.Centroid];
-        centroids_peak = reshape(centroids_peak,2,size(data_Peak,1))';
-        distances = zeros(1,size(data_Peak,1));
-        for k=1:size(centroids_peak,1)
-            distances(k) = norm([50 50] - centroids_peak(k,:));
-        end
-    % Remove the peak data that are likely to have come from the rim.
-        idx_remove = find(distances>56.568 == 1);
-        data_Peak(idx_remove)=[];
-    % Repeat for prot data
-        centroids_prot = [data_Prot.Centroid];
-        centroids_prot = reshape(centroids_prot,2,size(data_Prot,1))';
-        distances = zeros(1,size(data_Prot,1));
-        for k=1:size(centroids_prot,1)
-            distances(k) = norm([50 50] - centroids_prot(k,:));
-        end
-    % Remove the peak data that are likely to have come from the rim.
-        idx_remove = find(distances>56.568 == 1);
-        data_Prot(idx_remove)=[];   
+%     % Filter out peripheral rim data because those are different from
+%     % peaks: > 80 % of centroid-to-edge ([50 50]), which is ~56.5685 pixel
+%     % units
+%         centroids_peak = [data_Peak.Centroid];
+%         centroids_peak = reshape(centroids_peak,2,size(data_Peak,1))';
+%         distances = zeros(1,size(data_Peak,1));
+%         for k=1:size(centroids_peak,1)
+%             distances(k) = norm([50 50] - centroids_peak(k,:));
+%         end
+%     % Remove the peak data that are likely to have come from the rim.
+%         idx_remove = find(distances>56.568 == 1);
+%         data_Peak(idx_remove)=[];
+%     % Repeat for prot data
+%         centroids_prot = [data_Prot.Centroid];
+%         centroids_prot = reshape(centroids_prot,2,size(data_Prot,1))';
+%         distances = zeros(1,size(data_Prot,1));
+%         for k=1:size(centroids_prot,1)
+%             distances(k) = norm([50 50] - centroids_prot(k,:));
+%         end
+%     % Remove the protrusion data that are likely to have come from the rim.
+%         idx_remove = find(distances>56.568 == 1);
+%         data_Prot(idx_remove)=[];   
         
     % Fetch and calculate data field by field
     features_perCell(idx).FileName = feature_struct(idx).FileName;

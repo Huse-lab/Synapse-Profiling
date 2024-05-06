@@ -1,0 +1,336 @@
+Fig 1
+a	powerpoint assets
+b	
+	left: 
+		imageJ manual render
+	right, calculated using script: 
+		ImageAnalysis_SingleParticleMovie_BatchStellarisMDJ.m
+		code blocks: 
+			"Read the data files"
+			... all up to ...
+			"Convert secondary signal to mask and align cups"
+		plotsBatch_Miguel_v3.m
+		code blocks:
+			"Initialization"
+			"Plot triangulated surface of particles"
+c	
+	calculated using script:		
+		ImageAnalysis_SingleParticleMovie_BatchStellarisMDJ.m
+		code blocks:
+			"Read the data files"
+			... up to
+			"Convert secondary signal to mask and align cups"
+		Old_Update_Mask_GUI
+		PlotsBatch_Miguel_v3.m
+		code blocks:
+			"Initialization"
+			"Plot triangulated 2D surface of particles"
+	ROI calculated using script:
+		selectROI_v5.m
+		code blocks: all
+		hard-coded demarcation lines based on roi_position.position
+d	input:
+		MPStats file from IMG130_sgNT, k=70
+	calculated using script:
+		LineProfileAnalysis_Batch_v5.m
+		code blocks:
+			"initialization..."
+			"calculate volume profiles..."
+			"visualize indentation traces one by one"
+e	input for graph: 
+	Fig1_Indents_CellvsNocell_20230201.pzfx
+	calculated using script:		
+		LineProfileAnalysis_Batch_v5.m
+		code blocks:
+			"initialization..."
+			"calculate volume profiles..."
+			"plot and save all traces"
+f	input for graph:
+		Fig1_IndentsFromBeginning_IMG147-Day1-7-1-s9_20230131.pzfx
+	calculated similarly as in d
+g	input for graph:
+		X:\Miguel DJ (Labshare)\Lab life\Biomechanotyping\Kinetics (movies and time-autocorrelation)
+	calculated with script:
+		topography_timeAutocorr.m
+	blocks:
+		"initialize..." 
+		"auto-correlations of absolute topogrpahies..."
+	gridded synapse input calculated using scripts:
+		ImageAnalysis_SingleParticleMovie_BatchStellarisMDJ.m
+		code blocks:
+			"Read the data files"
+			... up to
+			"Convert secondary signal to mask and align cups"
+		Old_Update_Mask_GUI
+		selectROI_v5.m
+		save_GriddedSynapses_v5.m
+		code blocks:
+			"initialize..."
+			... up to
+			"interpolate and store gridded data"
+h-i	Generated using Imaris
+j	
+	calculated with script:
+		segment-mask-cellchannel_20231101.ijm
+	followed by script:
+		contourcurvature_bySlice_20231109.ijm
+	using output from previous step
+	plotted selected frames
+
+Fig S1
+a-d	powerpoint, imageJ, and Matlab assets
+	grids in d calculated as in Fig 1G
+e-g	
+	featurePicker_withPerCell_v3.m
+
+
+Fig S2
+a	powerpoint assets
+b	input for graph:
+	IMG155_actin-poison-dVROI_20240311-removeCK666forpaper.pzfx
+	calculated as in Fig 1E
+c-e	input for graph:
+		same as b
+	calculated as in Fig S1E-G
+
+Fig S3
+a	powerpoint and imageJ assets
+b	calculated using script:
+		contour_curvature_v2.m
+		code blocks for contour graph:
+			"initialization"
+			"load matrix..."
+			"parse the matrices..."
+		code blocks for histograms:			
+			"initialization"
+			"load matrix..."
+			"parse the matrices..."
+			"graph: histogram..."
+			"graph: manual norm2maxhistogram"
+c	similar to b, except code blocks exclude "graph: manual norm2maxhistogram"
+	
+Fig 2
+a-c	imageJ and Matlab assets, Matlab panels calculated as in Fig 1C
+d	input for graph:
+		X:\Miguel DJ (Labshare)\Lab life\Biomechanotyping\Degranulation topography\20230314_Degranulation_Redo_Debug\IMG147_Degranulation-ReAligned_20230316.mat
+	calculated using script:
+	degranulationROI_RealSpaceUpdate_Debug20230314.m
+		code blocks: 
+			"initialization"
+			... up to
+			"Plot: Collect MC & GC and overlay degranulations"
+
+Fig 3 and S4: various manually graphed assets
+	simulation .csvs calculated using script:
+		SimulationAnalysisBatch.m
+		code blocks: all
+	hard-coded graphing recorded in:
+		X:\Miguel DJ (Labshare)\Lab life\Biomechanotyping\Synapse modeling (Abel-Gaetjens)\20240312_Record-of-Paretoplots-Matlabcode.txt
+
+Fig 4
+a	powerpoint assets
+b	grids calculated as in Fig 1C
+c	input data:
+	IMG130_sgCSK_Deform-vs-Complexity_20230207.pzfx
+	calculated as in Fig 1E
+d	forgot which exact grid was used for this
+	Zernike chart plotted using script:
+	ZernikeChart_Plotter.m
+e	hard-coded
+f	
+	calculated from script:
+	Zernike_decomposition_MultiGridsInput_v4.m
+		code blocks:
+			"initialization"
+			... up to
+			"calculate & plot Z-PCA"
+			"automatically split Z-PCA plot into quantiles" (n=3)
+g	hard-coded
+h	input data:
+	IMG130_sgCSKgenes_ZPCA_ClusterComp_20230207Quartiled.pzfx
+	calculated using script:
+	Zernike_decomposition_MultiGridsInput_v4.m
+		code blocks:
+			"initialization"
+			... up to
+			"calculate & plot Z-PCA"
+			"automatically split Z-PCA plot into quantiles" (n=3)
+			"pattern category disproportionation"
+i	top panels hard-coded
+	bottom panel hard-coded
+	calculated using script:
+		Zernike_complexity_v5.m
+		code blocks:
+			"import grids..."
+			"set parameters"
+			"calculate pattern complexity numbers"
+j	input data:
+		IMG130_sgCSKgenes_Zernikecomplexity-recalc20240107.pzfx
+	calculated from script:
+		Zernike_complexity_v5.m
+		code blocks: same as i, import into Prism
+
+Fig S5
+a-c	input data:
+	IMG130_sgCSK_20230227_featuresPerCell.pzfx
+	calculated using script: as in Fig S1E-G
+
+Fig S6
+a-b	hard coded
+c	input data: same as Fig 4F
+	calculated using script: same as Fig 4F
+		code blocks:
+			"initialization"
+			... up to
+			"calculate & plot Z-PCA"
+			"Highlight cell types separately: scatter"
+d	import into Prism: score(:,1) data from coeff_struct data structure
+e	input data: same as Fig 4F
+	calculated using script: same as Fig 4F
+		code blocks:
+			"initialization"
+			... up to
+			"calculate & plot Z-PCA"
+			"Zernike mode breakdown"
+f	input data: same as Fig 4F
+	calculated using script: same as Fig 4I
+		code blocks:
+			"import..."
+			... up to
+			"assign labels"
+			"correlation plot of PC1 vs. Settle Complexity"
+
+Fig S7
+a	hard-coded, as in Fig 4I
+b-g	input data: same as Fig 4F
+	calculated using script: same as Fig 4I
+		code blocks:
+			"import..."
+			... up to
+			"assign labels"
+			"correlate complexity vs dV", import into Prism
+
+Fig 5
+a	powerpoint assets
+b-c	input data:
+	FLEX37_20240124_Stiffness-sweep-sgNT-WASp-PTEN\FLEX37_analysis.pzfx
+d	left: powerpoint assets
+	right, input data:
+	IMG157_Analysis-summary.pzfx
+	calculated using script: same as Fig 1E
+e	hard-coded
+f	
+	calculated using script: same as Fig 4F
+g	
+	calculated using script: same as Fig 4I
+
+Fig S8
+a-d	input data:
+	IMG157_Analysis-summary.pzfx
+	calculated using script: same as Fig S1E-G
+
+Fig 6
+a	Powerpoint assets
+b	input data:
+	Indent_IMG141_LPA_Stats3D_20230208.pzfx
+	calculated using script: same as Fig 1E
+c	
+	calculated using script: same as Fig 4I
+d	hard-coded
+e	input data: 
+	ZPCA_IMG141_20231109-CorrectColor.pzfx
+	calculated using script: same as Fig 4H
+f	input data: 
+	Complexity_IMG141_20240107.pzfx
+
+Fig S9
+a-b	FlowJo analysis
+	
+
+
+Fig S10
+a-c	input data:
+	FeaturesPerCell_IMG141_20230227.pzfx
+	calculated using script: same as Fig S1E-G
+d	
+	calculated using script: same as Fig S6E
+e-i	input data: same as Fig 6F
+	calculated using script: same as Fig S7B-G
+
+Fig S11
+a	powerpoint assets
+b-e	input data:
+	IMG146_Features_noTRP1_20230227Recalc.pzfx
+	calculated using script: same as Fig S1E-G
+f	calculated using script: same as Fig 4F
+g	calculated using script: same as Fig S6E
+h	hard-coded
+i	calculated using script: same as Fig 4H
+j	calculated using script: same as Fig 4J
+
+Fig 7
+a	powerpoint assets
+b	hard-coded
+
+d	
+	calculated using script: same as Fig 1E
+e	calculated using script: analyze_curvaturedistancedata_v4.m
+		code blocks:
+			"initialization..."
+			... up to
+			"population-average the radial profiles"
+			"pairwise difference heatmap plotting"
+	using distance_data files calculated using script:
+		save_GriddedSynapses_v5.m
+		code blocks:
+			"initialize..."
+			... up to
+			"create or extend..."
+			"calculate curvature/distance data"
+f-h	input data:
+	FeaturesperCell_IMG144-145_OT1vsBMDM_20230227.pzfx
+	calculated using script: same as Fig S1E-G
+i	
+	calculated using script: same as Fig 4F
+		code blocks:
+			"initialization"
+			...up to
+			"replot manual Z-PCA gates..."
+
+Fig S12
+a	powerpoint assets
+b-c	calculated using script:
+		analyze_curvaturedistancedata_v4.m
+		code blocks: all
+d	input data: same as Fig 7I
+	calculated using script: same as Fig S6E
+
+Fig 8
+a-b	powerpoint assets
+c	
+	calculated using script: 
+		Plotting_Fig7_update_20240220.m
+		code blocks: all
+d	calculated using script: same as Fig S6E
+e	hard-coded
+F
+	calculated using script:
+		ringratio_synapse.m
+
+g	powerpoint assets
+h	input data:
+		IMG154_Stiffness-sweep-Ringratio-vs-Stiffness_20240103.pzfx
+	calculated using script: same as f
+
+Fig S13
+a	input data:
+		IMG156_sgNT-WASp-PTEN-dVROI_20240122.pzfx
+	calculated using script: same as Fig 1E
+b	input data:
+		IMG157_correlation-Deformation-Zcomplexity.pzfx
+	calculated using script: same as Fig S7B-G
+c	input data:
+		IMG157_ZPCA-actin-Disproportionation.pzfx
+	calculated using script: same as Fig 4H
+
+Fig S14-15 were hard-coded

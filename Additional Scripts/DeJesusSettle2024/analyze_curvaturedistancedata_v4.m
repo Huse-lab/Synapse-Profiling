@@ -12,7 +12,7 @@
 % calculate distance-curvature matrices, then combine them as necessary.
 
 % 2021-04-05: Adjusted the y-axis slightly so they are aligned with their colored data,
-% by padding an extra  row on top of the D-C matrices (full of 0s).
+% by padding an extra row on top of the D-C matrices (full of 0s).
 
 % 2021-04-19: Upon Julie's suggestion, re-binned the curvature (y-) axis to
 % remove sharp dropoffs, and just to represent the data more faithfully.
@@ -65,7 +65,7 @@ save_choice = 2;
         save_choice = input("Save new DC matrix files? 0: No, just calculate. 1: Yes, save new files. ");
     end
 
-nbin = input("How many radial bins? ");
+nbin = input("How many radial bins? "); % Usually 20
  
 % Separately tackle the calculations depending on which signals exist.
 if isfield(distance_data,'MeanCurvature')

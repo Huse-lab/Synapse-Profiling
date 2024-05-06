@@ -21,7 +21,9 @@ curvatureStats.mean_concavity = mean(mc_v(mc_v<0));
 curvatureStats.total_concave_area = sum(mc_v<0)*(0.2^2); % 0.2 um/pixel
 curvatureStats.concave_area_map = mc < 0;
 
-%curvatureStats.pattern_complexity = calculateZernikeComplexity(mc,0.8);
+curvatureStats.PatternComplexity = calculateZernikeComplexity(mc,0.8);
+curvatureStats.ZCoefficients = calculateZernikeCoefficients(mc,15);
+curvatureStats.AdjustedZCoefficients = deRotateZernikeCoefficients(curvatureStats.ZCoefficients);
 
 actin_map = curvatureStats.concave_area_map | z_data == 0;
 curvatureStats.DegranMap = findEmptySlot(actin_map,5);
